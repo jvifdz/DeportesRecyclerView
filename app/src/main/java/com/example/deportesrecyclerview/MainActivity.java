@@ -127,6 +127,15 @@ public class MainActivity extends AppCompatActivity {
                         Toast.LENGTH_LONG).show();
                 misFilas.remove(posicionLongClick);
                 adaptador.notifyDataSetChanged();
+                break;
+            case   R.id.menuModificar:
+                Intent intent = new Intent(this,ModificarBBDD.class);
+                intent.putExtra("id",misFilas.get(posicionLongClick).getId());
+                intent.putExtra("nombre",misFilas.get(posicionLongClick).getTexto());
+                intent.putExtra("check",misFilas.get(posicionLongClick).isCheckbox());
+
+                startActivity(intent);
+                break;
         }
         return super.onContextItemSelected(item);
     }
@@ -142,6 +151,7 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.Insertar){
             startActivity(new Intent(this, InsertarBBDD.class));
         }
+
         return  true;
     }
     @Override
