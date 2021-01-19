@@ -1,5 +1,7 @@
 package com.example.deportesrecyclerview;
 
+import android.content.Intent;
+import android.database.Cursor;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     List<Deporte> misFilas = new ArrayList<Deporte>();
     int posicionLongClick=0;
     AdaptadorRecycler adaptador;
+    DBInterface dbInterface;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +37,16 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        misFilas.add(new Deporte(R.mipmap.ic_baloncesto,"Baloncesto",false));
+        dbInterface = new DBInterface(this);
+        dbInterface.abre();
+        cargarDeportes();
+
+        /*misFilas.add(new Deporte(R.mipmap.ic_baloncesto,"Baloncesto",false));
         misFilas.add(new Deporte(R.mipmap.ic_futbol,"Fútbol",false));
         misFilas.add(new Deporte(R.mipmap.ic_moto,"Motociclismo",false));
         misFilas.add(new Deporte(R.mipmap.ic_natacion,"Natación",false));
         misFilas.add(new Deporte(R.mipmap.ic_golf,"Golf",false));
-        misFilas.add(new Deporte(R.mipmap.ic_atletismo,"Atletismo",false));
+        misFilas.add(new Deporte(R.mipmap.ic_atletismo,"Atletismo",false));*/
 
         adaptador = new AdaptadorRecycler(misFilas);
 
@@ -73,6 +81,35 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void cargarDeportes(){
+        misFilas.clear();
+        Cursor c = dbInterface.obtenerDeportes();
+        if (c==null){
+            Toast.makeText(this,"Tabla vacía",Toast.LENGTH_LONG).show();
+        }else{
+            if (c.moveToFirst()){
+                do{
+                    boolean miCheck= true;
+
+                    if (c.getInt(2)==0){
+                        miCheck=false;
+                    }
+                    misFilas.add(new Deporte(c.getLong(0),
+                            R.mipmap.ic_atletismo,
+                            c.getString(1),
+                            miCheck));
+                }while(c.moveToNext());
+            }
+        }
+    }
+
+    @Override
+    public void onStop(){
+        super.onStop();
+        dbInterface.cierra();
+
+    }
+
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v,
                                     ContextMenu.ContextMenuInfo menuInfo){
@@ -103,9 +140,16 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
         if (id == R.id.Insertar){
-            Toast.makeText(this, "Click en insertar",
-                    Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, InsertarBBDD.class));
         }
         return  true;
+    }
+    @Override
+    public void onResume(){
+        super.onResume();
+        dbInterface.abre();
+        cargarDeportes();
+        adaptador.notifyDataSetChanged();
+
     }
 }

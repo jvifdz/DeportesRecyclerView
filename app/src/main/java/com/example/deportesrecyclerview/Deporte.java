@@ -1,14 +1,24 @@
 package com.example.deportesrecyclerview;
 
 public class Deporte {
+    long id;
     int imagen;
     String texto;
     boolean checkbox;
 
-    public Deporte(int imagen, String texto, boolean checkbox) {
+    public Deporte(long id, int imagen, String texto, boolean checkbox) {
+        this.id=id;
         this.imagen = imagen;
         this.texto = texto;
         this.checkbox = checkbox;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public int getImagen() {
