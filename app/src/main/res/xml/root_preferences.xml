@@ -1,0 +1,30 @@
+<PreferenceScreen
+        xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory
+            android:title="@string/datosusuario" android:text="@string/datosusuario" tools:text="@string/datosusuario">
+        <EditTextPreference
+                android:defaultValue="Default value"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                android:title="@string/nombre" android:key="nombre"/>
+        <EditTextPreference
+                android:defaultValue="Default value"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                android:title="@string/pwd" android:key="pwd"/>
+    </PreferenceCategory>
+    <PreferenceCategory
+            android:title="Preference category">
+
+        <EditTextPreference
+                android:defaultValue="Default value"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                android:title="Edit text preference" android:key="edit_text_preference_1"/>
+        <EditTextPreference
+                android:defaultValue="Default value"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                android:title="Edit text preference" android:key="edit_text_preference_1"/>
+    </PreferenceCategory>
+</PreferenceScreen>

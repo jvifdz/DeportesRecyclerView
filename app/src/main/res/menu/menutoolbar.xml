@@ -7,8 +7,10 @@
         android:title="Insertar"
         app:showAsAction="never" />
     <item
-        android:id="@+id/Buscar"
-        android:icon="?android:attr/actionModeWebSearchDrawable"
-        android:title="Buscar"
-        app:showAsAction="ifRoom|withText" />
+            android:id="@+id/Buscar"
+            android:icon="?android:attr/actionModeWebSearchDrawable"
+            android:title="Buscar"
+            app:showAsAction="ifRoom|withText"/>
+    <item android:title="@string/configuracion" android:id="@+id/configuracion"
+          android:icon="@android:drawable/ic_menu_preferences"/>
 </menu>

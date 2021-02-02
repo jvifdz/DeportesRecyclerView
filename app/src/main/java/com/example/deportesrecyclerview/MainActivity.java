@@ -137,7 +137,10 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this,
                         "Click largo sobre posicion "+posicionLongClick,
                         Toast.LENGTH_LONG).show();
+
+                dbInterface.borrarDeporte(misFilas.get(posicionLongClick).getId());
                 misFilas.remove(posicionLongClick);
+
                 adaptador.notifyDataSetChanged();
                 break;
             case   R.id.menuModificar:
@@ -165,6 +168,9 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
         if (id == R.id.Insertar){
             startActivity(new Intent(this, InsertarBBDD.class));
+        }
+        if (id==R.id.configuracion){
+            startActivity(new Intent(this, SettingsActivity.class));
         }
 
         return  true;
