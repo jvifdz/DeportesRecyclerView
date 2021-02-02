@@ -34,8 +34,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //toolbar
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+
 
         dbInterface = new DBInterface(this);
         dbInterface.abre();
@@ -53,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView miRecycler = findViewById(R.id.RecyclerViewDeportes);
         miRecycler.setAdapter(adaptador);
         miRecycler.setLayoutManager(new LinearLayoutManager(this));
+
+        //para el longclick abro y registro el menu contextual
 
         adaptador.setOnItemLongClickListener
                 (new OnRecyclerViewLongItemClickListener() {
@@ -110,6 +117,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //metodo en el que le digo que menu contextual esta abriendo y registrando arriba
+
+
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v,
                                     ContextMenu.ContextMenuInfo menuInfo){
@@ -117,6 +127,8 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater inflater = activity.getMenuInflater();
         inflater.inflate(R.menu.contextual, menu);
     }
+
+    //metodo cual se ha elegido
 
     @Override
     public boolean onContextItemSelected(MenuItem item){
@@ -140,6 +152,9 @@ public class MainActivity extends AppCompatActivity {
         return super.onContextItemSelected(item);
     }
 
+    //lo mismo pero de la toolbar
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menutoolbar, menu);
@@ -154,6 +169,7 @@ public class MainActivity extends AppCompatActivity {
 
         return  true;
     }
+    //hasta aqui toolbar
     @Override
     public void onResume(){
         super.onResume();
