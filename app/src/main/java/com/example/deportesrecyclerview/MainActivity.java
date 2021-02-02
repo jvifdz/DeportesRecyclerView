@@ -1,9 +1,12 @@
 package com.example.deportesrecyclerview;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,6 +31,10 @@ public class MainActivity extends AppCompatActivity {
     AdaptadorRecycler adaptador;
     DBInterface dbInterface;
 
+    //esto es de las preferencias
+    private SharedPreferences preferencias;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +45,10 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+        //esto es para las preferencias
+        preferencias= PreferenceManager.getDefaultSharedPreferences(this);
 
 
 
@@ -182,6 +193,13 @@ public class MainActivity extends AppCompatActivity {
         dbInterface.abre();
         cargarDeportes();
         adaptador.notifyDataSetChanged();
+
+
+        TextView miNombre= findViewById(R.id.textViewMain);
+
+
+        miNombre.setText(preferencias.getString("nombre","Sin nombre"));
+
 
     }
 }
